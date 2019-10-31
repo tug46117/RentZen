@@ -81,7 +81,14 @@ $(document).ready(function (){
 		$("#div-rentersignup").show()
 
 	});
-	
+	/* what happens if user log in ? */
+	$('#btnLogin').click(function(){
+		//Hide all the content wrapper
+		$(".content-wrapper").hide()
+		// show the next div
+		$("#div-dashboard").show()
+
+	});
 	/* what happens if the Sign Up button in Sign Up page is clicked? */
 	$('#btnSignUp').click(function(){
 		//Hide all the content wrapper
