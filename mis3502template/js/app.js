@@ -98,14 +98,14 @@ $(document).ready(function (){
 
 	});
 	/* what happens if the login button in home page is clicked? */
-	$('#btnPreSiginHome').click(function(){
+	$('#btnSigninHome').click(function(){
 		//Hide all the content wrapper
 		$(".content-wrapper").hide()
 		// show the next div
 		$("#div-login").show()	
 	});
 	/* what happens if the login button is clicked on account created page? */
-	$('#btnPreSigin').click(function(){
+	$('#btnSignin').click(function(){
 		//Hide all the content wrapper
 		$(".content-wrapper").hide()
 		// show the next div
