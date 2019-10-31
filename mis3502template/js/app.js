@@ -1,7 +1,8 @@
 "use strict";
 
 /* SOME CONSTANTS */
-var endpoint01 = "http://ec2-3-15-38-21.us-east-2.compute.amazonaws.com";
+var endpoint01 = "http://misdemo.temple.edu/rentzen";
+ // should be possible to condtionally drop the user into the homepage without having to login in everytime.
 localStorage.usertoken = 0;
 localStorage.lastnavlink = '';
 
@@ -29,10 +30,36 @@ var navigationControl = function(the_link){
 
 } /* end navigation control */
 
+// email : jm@email.com
+//	password:jm123 
 var loginController = function(){
 	//go get the data off the login form
 	var the_serialized_data = $('#form-login').serialize();
-	var url = endpoint01 + '/auth/';
+	var urltext = endpoint01 + '/renter';
+
+	$.ajax({
+		url: urltext ,
+		data: the_serialized_data,
+		type:'GET',
+		success: function(result){
+			console.log(result);
+			$('#login_message').html('');
+			$('#login_message').hide();
+			localStorage.usertoken = result.renterid; //login succeeded.  Set usertoken.
+			$('#renterid').val(localStorage.usertoken);
+			$('.secured').removeClass('locked');
+			$('.secured').addClass('unlocked');
+			$('#div-login').hide();
+			$('#div-dashboard').show();
+		} ,
+		error:function(result){
+			console.log(result);
+			localStorage.usertoken = 0; // login failed.  Set usertoken to it's initial value.
+			$('#login_message').html(result.responseJSON);
+			$('#login_message').show();
+		}, 
+	});
+	/*
 	$.getJSON(url,the_serialized_data,function(data){
 		//console.log(data);
 		if (typeof data === 'string'){
@@ -49,6 +76,7 @@ var loginController = function(){
 			$('#div-ABC').show();
 		}
 	});
+	*/
 	//scroll to top of page
 	$("html, body").animate({ scrollTop: "0px" });
 };
@@ -83,11 +111,8 @@ $(document).ready(function (){
 	});
 	/* what happens if user log in ? */
 	$('#btnLogin').click(function(){
-		//Hide all the content wrapper
-		$(".content-wrapper").hide()
 		// show the next div
-		$("#div-dashboard").show()
-
+		loginController();
 	});
 	/* what happens if the Sign Up button in Sign Up page is clicked? */
 	$('#btnSignUp').click(function(){
