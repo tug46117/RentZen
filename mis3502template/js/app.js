@@ -65,7 +65,7 @@ $(document).ready(function (){
 
 
     /* this reveals the default page */
-    $("#div-login").show();
+    $("#div-home").show();
 
     /* this controls navigation - show / hide pages as needed */
 
@@ -73,10 +73,36 @@ $(document).ready(function (){
 	$(".nav-link").click(function(){
 		navigationControl(this);
 	});
-		
-	/* what happens if the login button is clicked? */
-	$('#btnLogin').click(function(){
-		loginController();
+	/* what happens if the Homepage Sign Up button is clicked? */
+	$('#btnSignUpHome').click(function(){
+		//Hide all the content wrapper
+		$(".content-wrapper").hide()
+		// show the next div
+		$("#div-rentersignup").show()
+
+	});
+	
+	/* what happens if the Sign Up button in Sign Up page is clicked? */
+	$('#btnSignUp').click(function(){
+		//Hide all the content wrapper
+		$(".content-wrapper").hide()
+		// show the next div
+		$("#div-signupconfirm").show()
+
+	});
+	/* what happens if the login button in home page is clicked? */
+	$('#btnPreSiginHome').click(function(){
+		//Hide all the content wrapper
+		$(".content-wrapper").hide()
+		// show the next div
+		$("#div-login").show()	
+	});
+	/* what happens if the login button is clicked on account created page? */
+	$('#btnPreSigin').click(function(){
+		//Hide all the content wrapper
+		$(".content-wrapper").hide()
+		// show the next div
+		$("#div-login").show()	
 	});
 		
 }); /* end the document ready event*/

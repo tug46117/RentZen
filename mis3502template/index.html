@@ -102,21 +102,48 @@
         </div>
 
 
-		<div class="col-md-8 content-wrapper " id="div-AAA" style="display: none;">
+		<div class="col-md-8 content-wrapper " id="div-rentersignup" style="display: none;">
 			<div>
-                AAA Content goes here.
+                    <form id='form-signup'>
+                            <label for="SignupEmail">Email:</label>
+                            <input type="email" name="SignupUsername" id="SignupUsername" class="form-control" placeholder="Email">
+                            <label for="SignupPassword">Password:</label>
+                            <input type="password" name="SignupPassword" id="SignupPassword" class="form-control" placeholder="password" >
+                            <br>
+                            <div class="text-center">
+                            <input type="button" value="Sign Up" name="btnSignUp" id="btnSignUp" class="btn btn-primary" style="font-size:2em;width:100%;" >
+                            </div>
+                            <br>
+                            <div id='login_message' class="alert alert-danger text-center" style="display:none;">
+                            </div>
+                </form>            
             </div>
 		</div>
 		
-		<div class="col-md-8 content-wrapper " id="div-BBB" style="display: none;">
-			<div>
-                BBB Content goes here.
+		<div class="col-md-8 content-wrapper " id="div-home" style="display: none;">
+			<div class="text-center">
+                <img src="images/city.png" class="text-center" alt="city">
+                <h1>Welcome to RentZen</h1><br>
+                <p>
+                    <b>Our misssion?</b> Bring <i>zen</i> to renting <br>
+                </p>
+            </div>
+                <p>
+                    RentZen provides a digital experience for landlords to find qualified tenants and renters to find the home of their dreams without the hassle of in-person showings. 
+                    It's an all-in-one platform for renting homes and apartments. RentZen connects landlords 
+                    and renters via an easy to use platform that reduces in-person visits to properties, reviews user qualifications, and streamlines communication between landlords and renters.
+                </p>
+            <div class="text-center">         
+                <input type="button" value="Sign Up" name="btnSignUpHome" id="btnSignUpHome" class="btn btn-primary text-center " > 
+                <input type="button" value="Sign In" name="btnPreSiginHome" id="btnPreSiginHome" class="btn btn-primary text-center"  >        
             </div>
 		</div>
 		
-		<div class="col-md-8 content-wrapper " id="div-CCC" style="display: none;">
+		<div class="col-md-8 content-wrapper " id="div-signupconfirm" style="display: none;">
 			<div>
-                CCC Content goes here.
+                Your account was created.<br>
+                <input type="button" value="Sign In" name="btnPreSigin" id="btnPreSigin" class="btn btn-primary text-center"  >        
+
             </div>
 		</div>
 
