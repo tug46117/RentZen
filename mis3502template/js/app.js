@@ -80,7 +80,15 @@ var loginController = function(){
 	//scroll to top of page
 	$("html, body").animate({ scrollTop: "0px" });
 };
+var logoutController = function(){
+	//go get the data off the login form
+	$('.secured').addClass('locked');
+	$('.secured').removeClass('unlocked');
+	$(".content-wrapper").hide()
+	// show the next div
+	$("#div-home").show()	
 
+	};
 
 //document ready section
 $(document).ready(function (){
@@ -136,5 +144,14 @@ $(document).ready(function (){
 		// show the next div
 		$("#div-login").show()	
 	});
+
+	/* what happens if the dashboard logout and navigation logout button is clicked ? */
+	$('#dashboardLogOut').click(function(){
+		logoutController();
+	});
+	$('#navLogout').click(function(){
+		logoutController();
+	});
+	
 		
 }); /* end the document ready event*/
