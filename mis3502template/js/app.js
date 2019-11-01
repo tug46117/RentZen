@@ -59,24 +59,7 @@ var loginController = function(){
 			$('#login_message').show();
 		}, 
 	});
-	/*
-	$.getJSON(url,the_serialized_data,function(data){
-		//console.log(data);
-		if (typeof data === 'string'){
-			localStorage.usertoken = 0; // login failed.  Set usertoken to it's initial value.
-			$('#login_message').html(data);
-			$('#login_message').show();
-		} else {
-			$('#login_message').html('');
-			$('#login_message').hide();
-			localStorage.usertoken = data['user_id']; //login succeeded.  Set usertoken.
-			$('.secured').removeClass('locked');
-			$('.secured').addClass('unlocked');
-			$('#div-login').hide();
-			$('#div-ABC').show();
-		}
-	});
-	*/
+
 	//scroll to top of page
 	$("html, body").animate({ scrollTop: "0px" });
 };
