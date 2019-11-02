@@ -88,6 +88,8 @@ var SignUp = function(){
 			},
 			error: function(result){
 				console.log(result);
+				$('#signup_message').html(result.responseJSON);
+				$('#signup_message').show();
 			}
 		});
 	} //end startTheGame
