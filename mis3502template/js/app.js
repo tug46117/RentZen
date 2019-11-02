@@ -73,6 +73,7 @@ var logoutController = function(){
 
 	};
 
+	//testing bla bla bla asdasd
 //document ready section
 $(document).ready(function (){
 
