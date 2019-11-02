@@ -72,7 +72,25 @@ var logoutController = function(){
 	$("#div-home").show()	
 
 	};
-
+var SignUp = function(){
+	
+	var the_serialized_data = $('#form-signup').serialize();
+	var urltext = endpoint01 + '/renter';
+		$.ajax({
+			url: urltext,
+			type: 'POST',
+			data: the_serialized_data,
+			success: function(result){
+				console.log(the_serialized_data);
+				console.log(result);
+				$(".content-wrapper").hide()
+				$("#div-signupconfirm").show()
+			},
+			error: function(result){
+				console.log(result);
+			}
+		});
+	} //end startTheGame
 //document ready section
 $(document).ready(function (){
 
@@ -107,10 +125,7 @@ $(document).ready(function (){
 	});
 	/* what happens if the Sign Up button in Sign Up page is clicked? */
 	$('#btnSignUp').click(function(){
-		//Hide all the content wrapper
-		$(".content-wrapper").hide()
-		// show the next div
-		$("#div-signupconfirm").show()
+		SignUp();
 
 	});
 	/* what happens if the login button in home page is clicked? */
