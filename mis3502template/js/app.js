@@ -4,8 +4,7 @@
 var endpoint01 = "http://52.14.130.229:8222";
  // should be possible to condtionally drop the user into the homepage without having to login in everytime.
 localStorage.renterid = 0;
-localStorage.username = 0;
-localStorage.password = 0;
+
 
 
 
@@ -34,7 +33,30 @@ var navigationControl = function(the_link){
 	$(".navbar-collapse").collapse('hide'); /* explicitly collapse the navigation menu */
 
 } /* end navigation control */
+var UpdateLocalStorage = function(result){
+	localStorage.firstname = result.firstname;
+	localStorage.income = result.income;
+	localStorage.lastname = result.lastname;
+	localStorage.password = result.password;
+	localStorage.phone = result.phone;
+	localStorage.renterid = result.renterid;
+	localStorage.username = result.username;
 
+};
+var autoPopulateForm =function(){
+	$("#Signuprenterid").val(localStorage.renterid);
+	console.log(localStorage.username);
+	console.log(localStorage.password);
+
+	$("#SignupUsername").val(localStorage.username);
+	$("#SignupPassword").val(localStorage.password);
+	$("#SignupFirstName").val(localStorage.firstname);
+	$("#SignupLastName").val(localStorage.lastname);
+	$("#SignupPhone").val(localStorage.phone);
+	$("#SignupCreditRating").val(localStorage.creditrating);
+	$("#SignupIncome").val(localStorage.income);
+
+}
 // email : jm@email.com
 //	password:jm123 
 var loginController = function(){
@@ -50,7 +72,7 @@ var loginController = function(){
 			console.log(result);
 			$('#login_message').html('');
 			$('#login_message').hide();
-			localStorage.renterid = result.renterid; //login succeeded.  Set usertoken.
+			UpdateLocalStorage(result); //login succeeded.  Set usertoken.
 			$('#renterid').val(localStorage.renterid);
 			$('.secured').removeClass('locked');
 			$('.secured').addClass('unlocked');
@@ -114,7 +136,6 @@ var SignUp = function(){
 					//$(".content-wrapper").hide()
 					$("#profile_message").html("Update success");
 					$("#profile_message").show();
-					
 					$("#profile_message").removeClass();
 					$("#profile_message").addClass("alert alert-success text-center");
 				},
@@ -196,8 +217,7 @@ $(document).ready(function (){
 		$(".content-wrapper").hide();
 		// show the next div
 		$("#div-updateprofile").show();	
-		$("#Signuprenterid").val(localStorage.renterid);
-
+		autoPopulateForm();
 	});
 
 	$('#navbar-updateprofile').click(function(){
@@ -205,8 +225,7 @@ $(document).ready(function (){
 		$(".content-wrapper").hide();
 		// show the next div
 		$("#div-updateprofile").show();	
-		$("#Signuprenterid").val(localStorage.renterid);
-
+		autoPopulateForm();
 	});
 
 	$('#btnUpdateProfile').click(function(){
