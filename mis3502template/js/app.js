@@ -3,7 +3,7 @@
 /* SOME CONSTANTS */
 var endpoint01 = "http://52.14.130.229:8222";
  // should be possible to condtionally drop the user into the homepage without having to login in everytime.
-localStorage.usertoken = 0;
+localStorage.renterid = 0;
 localStorage.lastnavlink = '';
 
 /* SUPPORTING FUNCTIONS */
@@ -18,7 +18,7 @@ var navigationControl = function(the_link){
 
 	if (idToShow == '#div-login' ){
 		/* what happens if the login/logout link is clicked? */
-		localStorage.usertoken = 0;
+		localStorage.renterid = 0;
 		$(".secured").addClass("locked");
 		$(".secured").removeClass("unlocked");
 	}
@@ -45,8 +45,8 @@ var loginController = function(){
 			console.log(result);
 			$('#login_message').html('');
 			$('#login_message').hide();
-			localStorage.usertoken = result.renterid; //login succeeded.  Set usertoken.
-			$('#renterid').val(localStorage.usertoken);
+			localStorage.renterid = result.renterid; //login succeeded.  Set usertoken.
+			$('#renterid').val(localStorage.renterid);
 			$('.secured').removeClass('locked');
 			$('.secured').addClass('unlocked');
 			$('#div-login').hide();
@@ -54,7 +54,7 @@ var loginController = function(){
 		} ,
 		error:function(result){
 			console.log(result);
-			localStorage.usertoken = 0; // login failed.  Set usertoken to it's initial value.
+			localStorage.renterid = 0; // login failed.  Set usertoken to it's initial value.
 			$('#login_message').html(result.responseJSON);
 			$('#login_message').show();
 		}, 
@@ -96,7 +96,7 @@ var SignUp = function(){
 
 	// Update profile
 	var updateProfile = function(){
-	
+		
 		var the_serialized_data = $('#form-profile').serialize();
 		var urltext = endpoint01 + '/renter?';
 			$.ajax({
@@ -109,11 +109,16 @@ var SignUp = function(){
 					//$(".content-wrapper").hide()
 					$("#profile_message").html("Update success");
 					$("#profile_message").show();
+					$("#Signuprenterid").val(localStorage.renterid);
+					$("#profile_message").removeClass();
+					$("#profile_message").addClass("alert alert-success text-center");
 				},
 				error: function(result){
 					console.log(result);
 					$('#profile_message').html("Cannot update");
 					$('#profile_message').show();
+					$("#profile_message").removeClass();
+					$("#profile_message").addClass("alert alert-danger text-center");
 				}
 			});
 		}
@@ -186,10 +191,13 @@ $(document).ready(function (){
 		$(".content-wrapper").hide()
 		// show the next div
 		$("#div-updateprofile").show()	
+		$("#Signuprenterid").val(localStorage.renterid);
+
 	});
 
 	$('#btnUpdateProfile').click(function(){
 		updateProfile();
+
 	});
 
 	}); /* end the document ready event*/
