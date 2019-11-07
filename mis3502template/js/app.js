@@ -98,7 +98,7 @@ var SignUp = function(){
 	var updateProfile = function(){
 	
 		var the_serialized_data = $('#form-profile').serialize();
-		var urltext = endpoint01 + '/renter';
+		var urltext = endpoint01 + '/renter?';
 			$.ajax({
 				url: urltext,
 				type: 'PUT',
