@@ -4,6 +4,11 @@
 var endpoint01 = "http://52.14.130.229:8222";
  // should be possible to condtionally drop the user into the homepage without having to login in everytime.
 localStorage.renterid = 0;
+localStorage.username = 0;
+localStorage.password = 0;
+
+
+
 localStorage.lastnavlink = '';
 
 /* SUPPORTING FUNCTIONS */
@@ -109,7 +114,7 @@ var SignUp = function(){
 					//$(".content-wrapper").hide()
 					$("#profile_message").html("Update success");
 					$("#profile_message").show();
-					$("#Signuprenterid").val(localStorage.renterid);
+					
 					$("#profile_message").removeClass();
 					$("#profile_message").addClass("alert alert-success text-center");
 				},
@@ -188,9 +193,18 @@ $(document).ready(function (){
 	/* what happens if the dashboard Update Profile button is clicked ? */
 	$('#dashboardUpdateProfile').click(function(){
 		//Hide all the content wrapper
-		$(".content-wrapper").hide()
+		$(".content-wrapper").hide();
 		// show the next div
-		$("#div-updateprofile").show()	
+		$("#div-updateprofile").show();	
+		$("#Signuprenterid").val(localStorage.renterid);
+
+	});
+
+	$('#navbar-updateprofile').click(function(){
+		//Hide all the content wrapper
+		$(".content-wrapper").hide();
+		// show the next div
+		$("#div-updateprofile").show();	
 		$("#Signuprenterid").val(localStorage.renterid);
 
 	});
