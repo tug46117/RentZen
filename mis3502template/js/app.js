@@ -1,7 +1,7 @@
 "use strict";
 
 /* SOME CONSTANTS */
-var endpoint01 = "http://misdemo.temple.edu/rentzen";
+var endpoint01 = "http://52.14.130.229:8222";
  // should be possible to condtionally drop the user into the homepage without having to login in everytime.
 localStorage.usertoken = 0;
 localStorage.lastnavlink = '';
@@ -93,7 +93,34 @@ var SignUp = function(){
 			}
 		});
 	} //end startTheGame
-//document ready section
+
+	// Update profile
+	var updateProfile = function(){
+	
+		var the_serialized_data = $('#form-profile').serialize();
+		var urltext = endpoint01 + '/renter';
+			$.ajax({
+				url: urltext,
+				type: 'PUT',
+				data: the_serialized_data,
+				success: function(result){
+					console.log(the_serialized_data);
+					console.log(result);
+					//$(".content-wrapper").hide()
+					$("#profile_message").html("Update success");
+					$("#profile_message").show();
+				},
+				error: function(result){
+					console.log(result);
+					$('#profile_message').html("Cannot update");
+					$('#profile_message').show();
+				}
+			});
+		}
+
+
+
+	//document ready section
 $(document).ready(function (){
 
     /* ------------------  basic navigation ----------------*/
@@ -153,5 +180,16 @@ $(document).ready(function (){
 		logoutController();
 	});
 	
-		
-}); /* end the document ready event*/
+	/* what happens if the dashboard Update Profile button is clicked ? */
+	$('#dashboardUpdateProfile').click(function(){
+		//Hide all the content wrapper
+		$(".content-wrapper").hide()
+		// show the next div
+		$("#div-updateprofile").show()	
+	});
+
+	$('#btnUpdateProfile').click(function(){
+		updateProfile();
+	});
+
+	}); /* end the document ready event*/

@@ -44,16 +44,10 @@
     <!--Each individual item can be secured by adding the class: secured -->
         <ul class="navbar-nav ml-auto">
                 <li class="nav-item secured">
-                    <a class="nav-link" href="#div-ABC"><i class="fa fa-list"></i> ABC Links </a>
+                    <a class="nav-link" href="#div-dashboard"><i class="fa fa-list"></i> Dashboard </a>
                 </li>
                 <li class="nav-item secured">
-                    <a class="nav-link" href="#div-AAA"><i class="fa fa-link"></i> Option AAA </a>
-                </li>
-                <li class="nav-item secured">
-                    <a class="nav-link" href="#div-BBB"><i class="fa fa-link"></i> Option BBB </a>
-                </li>
-                <li class="nav-item secured">
-                    <a class="nav-link" href="#div-CCC"><i class="fa fa-link"></i> Option CCC </a>
+                    <a class="nav-link" href="#div-updateprofile"><i class="fa fa-link"></i> Update Profile </a>
                 </li>
                 <li class="nav-item secured">
                     <a class="nav-link" id="navLogout"><i class="fa fa-sign-out"></i>Logout</a>
@@ -104,7 +98,7 @@
             <br>
             <div class="list-group">
                     <div class="list-group-item list-group-item-action active"><b>Account </b></div>
-                    <a class="list-group-item list-group-item-action">Update Profile <i class="fa fa-angle-double-right pull-right"></i></a>
+                    <a id="dashboardUpdateProfile" class="list-group-item list-group-item-action">Update Profile <i class="fa fa-angle-double-right pull-right"></i></a>
                     <a id="dashboardLogOut" class="list-group-item list-group-item-action">Log Out <i class="fa fa-angle-double-right pull-right"></i></a>
     
                 </div>
@@ -118,12 +112,7 @@
                             <input type="email" name="username" id="SignupUsername" class="form-control" placeholder="Email">
                             <label for="SignupPassword">Password:</label>
                             <input type="password" name="password" id="SignupPassword" class="form-control" placeholder="password" >
-                            <label for="SignupFirstName">First Name:</label>
-                            <input type="text" name="firstname" id="SignupFirstName" class="form-control" placeholder="firstname" >
-                            <label for="SignupLastName">Last Name:</label>
-                            <input type="text" name="lastname" id="SignupLastName" class="form-control" placeholder="lastname" >
-                            <label for="SignupPhone">Phone:</label>
-                            <input type="number" name="phone" id="SignupPhone" class="form-control" placeholder="9999999999" >
+        
                             <br>
                             <div class="text-center">
                             <input type="button" value="Sign Up" name="btnSignUp" id="btnSignUp" class="btn btn-primary" style="font-size:2em;width:100%;" >
@@ -133,7 +122,41 @@
                             </div>
                 </form>            
             </div>
-		</div>
+        </div>
+        
+        <!-- START: Update Profile form -->
+        <div class="col-md-8 content-wrapper " id="div-updateprofile" style="display: none;">
+			<div>
+                    <form id='form-profile'>
+                            <label for="SignupEmail">Email:</label>
+                            <input type="email" name="username" id="SignupUsername" class="form-control" placeholder="Email">
+                            <label for="SignupPassword">Password:</label>
+                            <input type="password" name="password" id="SignupPassword" class="form-control" placeholder="password" >
+                            <label for="SignupFirstName">First Name:</label>
+                            <input type="text" name="firstname" id="SignupFirstName" class="form-control" placeholder="firstname" >
+                            <label for="SignupLastName">Last Name:</label>
+                            <input type="text" name="lastname" id="SignupLastName" class="form-control" placeholder="lastname" >
+                            <label for="SignupPhone">Phone:</label>
+                            <input type="number" name="phone" id="SignupPhone" class="form-control" placeholder="9999999999" >
+                            <label for="SignupCreditRating">Credit Rating:</label>
+                            <input type="number" name="creditrating" id="SignupCreditRating" class="form-control" placeholder="100" >
+                            <label for="SignupIncome">Income:</label>
+                            <input type="number" name="income" id="SignupIncome" class="form-control" placeholder="$9999999" >
+
+                            
+                            <br>
+                            <div class="text-center">
+                            <input type="button" value="Update Profile" name="btnUpdateProfile" id="btnUpdateProfile" class="btn btn-primary" style="font-size:2em;width:100%;" >
+                            </div>
+                            <br>
+                            <div id='profile_message' class="alert alert-danger text-center" style="display:none;">
+                            </div>
+                </form>            
+            </div>
+        </div>
+
+        <!-- END: Update Profile form -->
+
 		
 		<div class="col-md-8 content-wrapper " id="div-home" style="display: none;">
 			<div class="text-center">
