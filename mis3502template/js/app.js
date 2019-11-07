@@ -34,6 +34,7 @@ var navigationControl = function(the_link){
 
 } /* end navigation control */
 var UpdateLocalStorage = function(result){
+	localStorage.creditrating = result.creditrating;
 	localStorage.firstname = result.firstname;
 	localStorage.income = result.income;
 	localStorage.lastname = result.lastname;
@@ -45,11 +46,8 @@ var UpdateLocalStorage = function(result){
 };
 var autoPopulateForm =function(){
 	$("#Signuprenterid").val(localStorage.renterid);
-	console.log(localStorage.username);
-	console.log(localStorage.password);
-
-	$("#SignupUsername").val(localStorage.username);
-	$("#SignupPassword").val(localStorage.password);
+	$("#UpdateUsername").val(localStorage.username);
+	$("#UpdatePassword").val(localStorage.password);
 	$("#SignupFirstName").val(localStorage.firstname);
 	$("#SignupLastName").val(localStorage.lastname);
 	$("#SignupPhone").val(localStorage.phone);
