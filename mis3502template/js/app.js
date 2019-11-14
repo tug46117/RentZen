@@ -34,6 +34,7 @@ var navigationControl = function(the_link){
 
 } /* end navigation control */
 var UpdateLocalStorage = function(result){
+	localStorage.clear();
 	localStorage.creditrating = result.creditrating;
 	localStorage.firstname = result.firstname;
 	localStorage.income = result.income;
