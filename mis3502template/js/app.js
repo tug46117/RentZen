@@ -64,7 +64,7 @@ var showProperty = function (result) {
 
 // Populate list of properties in CITY
 
-var autoPopulateProperty =function(result){
+var autoPopulateProperties =function(result){
 	console.log(result);
 	for(var i=0;i<result.length;i++){
 		console.log(result[i]['street']);
@@ -181,7 +181,7 @@ var SignUp = function(){
 			//GetProperty(result); //login succeeded.  Set usertoken.
 			$(".content-wrapper").hide();
 			$("#div-propertylist").show();
-			autoPopulateProperty(result);
+			autoPopulateProperties(result);
 		} ,
 		error:function(result){
 			console.log(result);
