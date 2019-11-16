@@ -56,6 +56,24 @@ var autoPopulateForm =function(){
 	$("#SignupIncome").val(localStorage.income);
 
 }
+
+var showProperty = function (result) {
+	console.log(result);
+
+}
+
+// Populate list of properties in CITY
+
+var autoPopulateProperty =function(result){
+	console.log(result);
+	for(var i=0;i<result.length;i++){
+		console.log(result[i]['street']);
+		$("#divrow").append("<div class= 'col-md-6'> <div class='img-thumnail'> <a href='#' onclick = showProperty("+ result[i]["propertyid"] +")>" + "<html>"+result[i]["street"]+"</html>" + "<img class='img-fluid rounded' style ='width: 100%' src ='images/no_image.png'> </a> </div> </div>"
+			)
+
+	};
+}; 
+
 // email : jm@email.com
 //	password:jm123 
 var loginController = function(){
@@ -160,10 +178,10 @@ var SignUp = function(){
 		data: the_serialized_data,
 		type:'GET',
 		success: function(result){
-			console.log(result);
 			//GetProperty(result); //login succeeded.  Set usertoken.
-			$(".content-wrapper").hide()
-			$("#div-propertylist").show()	
+			$(".content-wrapper").hide();
+			$("#div-propertylist").show();
+			autoPopulateProperty(result);
 		} ,
 		error:function(result){
 			console.log(result);
@@ -172,10 +190,10 @@ var SignUp = function(){
 
 		}, 
 	});
-
 	
 	};
 
+	
 
 
 	//document ready section
