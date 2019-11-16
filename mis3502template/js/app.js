@@ -55,12 +55,57 @@ var autoPopulateForm =function(){
 	$("#SignupCreditRating").val(localStorage.creditrating);
 	$("#SignupIncome").val(localStorage.income);
 
-}
+};
+
+
+var UpdateLocalProperty = function(result){
+	localStorage.clear();
+	localStorage.street = result.street;
+	localStorage.description = result.description;
+	localStorage.city = result.city;
+	localStorage.beds = result.beds;
+	localStorage.baths = result.baths;
+	localStorage.sqft = result.sqft;
+	localStorage.rental_fee = result.rental_fee;
+	
+};
+
+var autoPopulateLocalProperty =function(){
+	
+	$("#propertyheader").html("Property on " + localStorage.street);
+	$("#property_description").html("<b> Description: </b> <br> " + localStorage.description);
+	$("#property_city").html("<b> City: </b> <br> " + localStorage.city);
+	$("#property_bed").html("<b> Beds: </b> <br> " + localStorage.beds);
+	$("#property_bath").html("<b> Baths: </b> <br> " + localStorage.baths);
+	$("#property_feet").html("<b> Square Feet: </b> <br> " + localStorage.sqft);
+	$("#property_rent").html("<b> Monthly Rent: </b> <br> " + localStorage.rental_fee);
+	
+};
+
 
 var showProperty = function (result) {
 	console.log(result);
+	
+	var urltext = endpoint01 + '/rentalproperty?propertyid=';
 
-}
+	$.ajax({
+		url: urltext + result,
+		type:'GET',
+		success: function(result){
+			//GetProperty(result); //login succeeded.  Set usertoken.
+			console.log(result);
+			UpdateLocalProperty(result);
+			$(".content-wrapper").hide();
+			$("#div-property").show();
+			autoPopulateLocalProperty(); 
+
+		} ,
+		error:function(result){
+			console.log(result);
+			
+		}, 
+	});
+};
 
 // Populate list of properties in CITY
 
