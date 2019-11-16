@@ -148,6 +148,34 @@ var SignUp = function(){
 			});
 		}
 
+	// Get list of properties in CITY
+
+	var GetProperty = function(){
+	//go get the data off the login form
+	var the_serialized_data = $('#form-city').serialize();
+	var urltext = endpoint01 + '/rentalproperties';
+
+	$.ajax({
+		url: urltext ,
+		data: the_serialized_data,
+		type:'GET',
+		success: function(result){
+			console.log(result);
+			//GetProperty(result); //login succeeded.  Set usertoken.
+			$(".content-wrapper").hide()
+			$("#div-propertylist").show()	
+		} ,
+		error:function(result){
+			console.log(result);
+			$('#city_message').html(result.responseJSON);
+			$('#city_message').show();
+
+		}, 
+	});
+
+	
+	};
+
 
 
 	//document ready section
@@ -210,6 +238,24 @@ $(document).ready(function (){
 		logoutController();
 	});
 	
+	
+	/* what happens if the dashboard Search for Properties is clicked ? */
+	$('#dashboard-searchCity').click(function(){
+		//Hide all the content wrapper
+		$(".content-wrapper").hide()
+		// show the next div
+		$("#div-city").show()	
+	});
+
+
+	$('#btnCity').click(function(){
+		//Hide all the content wrapper
+		
+		// show the next div
+		GetProperty();
+	});
+
+
 	/* what happens if the dashboard Update Profile button is clicked ? */
 	$('#dashboardUpdateProfile').click(function(){
 		//Hide all the content wrapper
