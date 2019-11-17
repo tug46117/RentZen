@@ -33,8 +33,8 @@ var navigationControl = function(the_link){
 	$(".navbar-collapse").collapse('hide'); /* explicitly collapse the navigation menu */
 
 } /* end navigation control */
+
 var UpdateLocalStorage = function(result){
-	localStorage.clear();
 	localStorage.creditrating = result.creditrating;
 	localStorage.firstname = result.firstname;
 	localStorage.income = result.income;
@@ -82,6 +82,19 @@ var autoPopulateLocalProperty =function(){
 	
 };
 
+// Populate list of properties in CITY
+
+var autoPopulateProperties =function(result){
+	console.log(result);
+	for(var i=0;i<result.length;i++){
+		console.log(result[i]['street']);
+		$("#divrow").append("<div class= 'col-md-6'> <div class='img-thumnail'> <a href='#' onclick = showProperty("+ 
+		result[i]["propertyid"] +")>" + "<html>"+result[i]["street"]+"</html>" 
+		+ "<img class='img-fluid rounded' style ='width: 100%' src ='images/no_image.png'> </a> </div> </div>"
+			)
+
+	};
+}; 
 
 var showProperty = function (result) {
 	console.log(result);
@@ -107,20 +120,6 @@ var showProperty = function (result) {
 	});
 };
 
-// Populate list of properties in CITY
-
-var autoPopulateProperties =function(result){
-	console.log(result);
-	for(var i=0;i<result.length;i++){
-		console.log(result[i]['street']);
-		$("#divrow").append("<div class= 'col-md-6'> <div class='img-thumnail'> <a href='#' onclick = showProperty("+ result[i]["propertyid"] +")>" + "<html>"+result[i]["street"]+"</html>" + "<img class='img-fluid rounded' style ='width: 100%' src ='images/no_image.png'> </a> </div> </div>"
-			)
-
-	};
-}; 
-
-// email : jm@email.com
-//	password:jm123 
 var loginController = function(){
 	//go get the data off the login form
 	var the_serialized_data = $('#form-login').serialize();
@@ -152,6 +151,7 @@ var loginController = function(){
 	//scroll to top of page
 	$("html, body").animate({ scrollTop: "0px" });
 };
+
 var logoutController = function(){
 	//go get the data off the login form
 	$('.secured').addClass('locked');
@@ -161,6 +161,7 @@ var logoutController = function(){
 	$("#div-home").show()	
 
 	};
+
 var SignUp = function(){
 	
 	var the_serialized_data = $('#form-signup').serialize();
@@ -183,8 +184,23 @@ var SignUp = function(){
 		});
 	} //end startTheGame
 
+var GetUserProfile = function(){
+		//go get the data off the login form
+		var the_serialized_data = $('#form-login').serialize();
+		var urltext = endpoint01 + '/renter';
+		$.ajax({
+			url: urltext ,
+			data: the_serialized_data,
+			type:'GET',
+			success: function(result){
+				UpdateLocalStorage(result);
+				autoPopulateForm(); 
+			}
+		});
+		
+	};
 	// Update profile
-	var updateProfile = function(){
+ var updateProfile = function(){
 		
 		var the_serialized_data = $('#form-profile').serialize();
 		var urltext = endpoint01 + '/renter?';
@@ -209,11 +225,10 @@ var SignUp = function(){
 					$("#profile_message").addClass("alert alert-danger text-center");
 				}
 			});
-		}
+	};
 
 	// Get list of properties in CITY
-
-	var GetProperty = function(){
+var GetProperty = function(){
 	//go get the data off the login form
 	var the_serialized_data = $('#form-city').serialize();
 	var urltext = endpoint01 + '/rentalproperties';
@@ -235,12 +250,7 @@ var SignUp = function(){
 
 		}, 
 	});
-	
 	};
-
-	
-
-
 	//document ready section
 $(document).ready(function (){
 
@@ -312,8 +322,6 @@ $(document).ready(function (){
 
 
 	$('#btnCity').click(function(){
-		//Hide all the content wrapper
-		
 		// show the next div
 		GetProperty();
 	});
@@ -325,7 +333,8 @@ $(document).ready(function (){
 		$(".content-wrapper").hide();
 		// show the next div
 		$("#div-updateprofile").show();	
-		autoPopulateForm();
+		$("#profile_message").hide();
+		GetUserProfile();
 	});
 
 	$('#navbar-updateprofile').click(function(){
@@ -333,7 +342,8 @@ $(document).ready(function (){
 		$(".content-wrapper").hide();
 		// show the next div
 		$("#div-updateprofile").show();	
-		autoPopulateForm();
+		$("#profile_message").hide();
+		GetUserProfile();
 	});
 
 	$('#btnUpdateProfile').click(function(){
