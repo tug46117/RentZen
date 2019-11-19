@@ -59,7 +59,6 @@ var autoPopulateForm =function(){
 
 
 var UpdateLocalProperty = function(result){
-	localStorage.clear();
 	localStorage.street = result.street;
 	localStorage.description = result.description;
 	localStorage.city = result.city;
@@ -67,6 +66,10 @@ var UpdateLocalProperty = function(result){
 	localStorage.baths = result.baths;
 	localStorage.sqft = result.sqft;
 	localStorage.rental_fee = result.rental_fee;
+	localStorage.landlordfirstname = result.landlordfirstname;
+	localStorage.landlordlastname = result.landlordlastname;
+	localStorage.landlordusername = result.landlordusername;
+
 	
 };
 
@@ -80,6 +83,18 @@ var autoPopulateLocalProperty =function(){
 	$("#property_feet").html("<b> Square Feet: </b> <br> " + localStorage.sqft);
 	$("#property_rent").html("<b> Monthly Rent: </b> <br> " + localStorage.rental_fee);
 	
+};
+var autoPopulateApplicationForm =function(){
+	$("#applicationpropertyheader").html("Property: "+ localStorage.street )
+	$("#landlordname").val(localStorage.landlordfirstname+" "+ localStorage.landlordlastname);
+	$("#landlordemail").val(localStorage.landlordusername);
+	$("#ApplicationName").val(localStorage.firstname +" "+localStorage.lastname);
+	$("#ApplicationIncome").val(localStorage.income);
+	$("#ApplicationEmail").val(localStorage.username);
+	$("#ApplicationPhone").val(localStorage.phone);
+	$("#ApplicationCreditRating").val(localStorage.creditrating);
+	$("#application_renterid").val(localStorage.renterid);
+
 };
 
 // Populate list of properties in CITY
@@ -345,10 +360,24 @@ $(document).ready(function (){
 		$("#profile_message").hide();
 		GetUserProfile();
 	});
+	$('#UpdateProfileApplication').click(function(){
+		// show the next div
+		$("#div-applicationform").hide();
+		$("#div-updateprofile").show();	
+		$("#profile_message").hide();
+		GetUserProfile();
+	});
 
 	$('#btnUpdateProfile').click(function(){
 		updateProfile();
 
 	});
-
+	$('#btnApply').click(function(){
+		//Hide all the content wrapper
+		$(".content-wrapper").hide();
+		// show the next div
+		$("#div-applicationform").show();	
+		autoPopulateApplicationForm();
+	});
+	
 	}); /* end the document ready event*/
