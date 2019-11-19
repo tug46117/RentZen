@@ -75,7 +75,7 @@ var UpdateLocalProperty = function(result){
 
 var autoPopulateLocalProperty =function(){
 	
-	$("#propertyheader").html("Property on " + localStorage.street);
+	$("#propertyheader").html("<div class='polaroid'><div class='container'><p>Property: </p>"+ localStorage.street+"</div>"+"<img style ='width: 100%' src='images/no_image.png'></div></div>")
 	$("#property_description").html("<b> Description: </b> <br> " + localStorage.description);
 	$("#property_city").html("<b> City: </b> <br> " + localStorage.city);
 	$("#property_bed").html("<b> Beds: </b> <br> " + localStorage.beds);
@@ -85,7 +85,7 @@ var autoPopulateLocalProperty =function(){
 	
 };
 var autoPopulateApplicationForm =function(){
-	$("#applicationpropertyheader").html("Property: "+ localStorage.street )
+	$("#applicationpropertyheader").html("<div class='polaroid'><div class='container'><p>Property: </p>"+ localStorage.street+"</div>"+"<img style ='width: 100%' src='images/no_image.png'></div></div>")
 	$("#landlordname").val(localStorage.landlordfirstname+" "+ localStorage.landlordlastname);
 	$("#landlordemail").val(localStorage.landlordusername);
 	$("#ApplicationName").val(localStorage.firstname +" "+localStorage.lastname);
@@ -103,9 +103,9 @@ var autoPopulateProperties =function(result){
 	console.log(result);
 	for(var i=0;i<result.length;i++){
 		console.log(result[i]['street']);
-		$("#divrow").append("<div class= 'col-md-6'> <div class='img-thumnail'> <a href='#' onclick = showProperty("+ 
-		result[i]["propertyid"] +")>" + "<html>"+result[i]["street"]+"</html>" 
-		+ "<img class='img-fluid rounded' style ='width: 100%' src ='images/no_image.png'> </a> </div> </div>"
+		$("#divrow").append("<div class= 'col-md-6'> <div class='polaroidList'> <a href='#' onclick = showProperty("+ 
+		result[i]["propertyid"] +")>" + "<img style ='width: 100%' src ='images/no_image.png'><div class='container'><html>"+result[i]["street"]+"</html></div>" 
+		+ " </a> </div> </div>"
 			)
 
 	};

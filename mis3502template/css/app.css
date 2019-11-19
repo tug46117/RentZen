@@ -31,3 +31,20 @@ label{
 .secured {
     border-width: initial; /*set border-width to whatever the default is. */
 }
+div.polaroid {
+    width: 60%;
+    background-color: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    margin-bottom: 25px;
+  }
+  div.polaroidList {
+    width: 80%;
+    background-color: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    margin-bottom: 25px;
+  } 
+  
+div.container {
+    text-align: center;
+    padding: 10px 20px;
+  }
