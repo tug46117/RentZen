@@ -100,13 +100,15 @@ var autoPopulateApplicationForm =function(){
 // Populate list of properties in CITY
 
 var autoPopulateProperties =function(result){
+
 	console.log(result);
 	for(var i=0;i<result.length;i++){
 		console.log(result[i]['street']);
+		
 		$("#divrow").append("<div class= 'col-md-6'> <div class='polaroidList'> <a href='#' onclick = showProperty("+ 
 		result[i]["propertyid"] +")>" + "<img style ='width: 100%' src ='images/no_image.png'><div class='container'><html>"+result[i]["street"]+"</html></div>" 
 		+ " </a> </div> </div>"
-			)
+			);
 
 	};
 }; 
@@ -266,6 +268,27 @@ var GetProperty = function(){
 		}, 
 	});
 	};
+// Get list of properties in CITY
+var GetMap = function(){
+	//go get the data off the login form
+	//https://developers.google.com/maps/documentation/maps-static/dev-guide
+	//https://maps.googleapis.com/maps/api/staticmap?center=63.259591,-144.667969&zoom=6&size=400x400
+//&markers=color:blue%7Clabel:S%7C62.107733,-145.541936&markers=size:tiny%7Ccolor:green%7CDelta+Junction,AK
+//&markers=size:mid%7Ccolor:0xFFFF00%7Clabel:C%7CTok,AK"&key=YOUR_API_KEY
+	$.ajax({
+		url: "https://maps.googleapis.com/maps/api/staticmap?",
+		type: "GET",
+		data: {
+		  center: "",
+		  destination: $("#destinations").val(),
+		  roadmap: "roadmap ",
+		  key: "AIzaSyBkYy3QdqyYgHr8_jUiX8WEePPE5DGIQy8"
+		},
+		success: function(data) {
+		  console.log(data);
+		}
+	  });
+	};
 	//document ready section
 $(document).ready(function (){
 
@@ -332,6 +355,7 @@ $(document).ready(function (){
 		//Hide all the content wrapper
 		$(".content-wrapper").hide()
 		// show the next div
+		$("#divrow").html("");
 		$("#div-city").show()	
 	});
 
