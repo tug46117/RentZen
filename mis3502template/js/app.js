@@ -76,7 +76,7 @@ var UpdateLocalProperty = function(result){
 };
 
 var autoPopulateLocalProperty =function(){
-	
+	if(localStorage.picture_url ===""){
 	$("#propertyheader").html("<div class='polaroid'><div class='container'><p>Property: </p>"+ localStorage.street+"</div>"+"<img style ='width: 100%' src='images/no_image.png'></div></div>");
 	$("#property_description").html("<b> Description: </b> <br> " + localStorage.description);
 	$("#property_city").html("<b> City: </b> <br> " + localStorage.city);
@@ -84,9 +84,21 @@ var autoPopulateLocalProperty =function(){
 	$("#property_bath").html("<b> Baths: </b> <br> " + localStorage.baths);
 	$("#property_feet").html("<b> Square Feet: </b> <br> " + localStorage.sqft);
 	$("#property_rent").html("<b> Monthly Rent: </b> <br> " + localStorage.rental_fee);
+}
+	else{
+	var url = "http://maps.googleapis.com/maps/api/streetview?location="+localStorage.street.replace(/ /g,'')+","+localStorage.city+"&size=500x500&key=AIzaSyBkYy3QdqyYgHr8_jUiX8WEePPE5DGIQy8"
+	$("#propertyheader").html("<div class='polaroid'><div class='container'><p>Property: </p>"+ localStorage.street+"</div>"+"<img style ='width: 100%' src ="+"'"+url+"'"+ "'></div></div>")
+	$("#property_description").html("<b> Description: </b> <br> " + localStorage.description);
+	$("#property_city").html("<b> City: </b> <br> " + localStorage.city);
+	$("#property_bed").html("<b> Beds: </b> <br> " + localStorage.beds);
+	$("#property_bath").html("<b> Baths: </b> <br> " + localStorage.baths);
+	$("#property_feet").html("<b> Square Feet: </b> <br> " + localStorage.sqft);
+	$("#property_rent").html("<b> Monthly Rent: </b> <br> " + localStorage.rental_fee);
+	};
 	
 };
 var autoPopulateApplicationForm =function(){
+	if(localStorage.picture_url ===""){
 	$("#applicationpropertyheader").html("<div class='polaroid'><div class='container'><p>Property: </p>"+ localStorage.street+"</div>"+"<img style ='width: 100%' src='images/no_image.png'></div></div>");
 	$("#landlordname").val(localStorage.landlordfirstname+" "+ localStorage.landlordlastname);
 	$("#landlordemail").val(localStorage.landlordusername);
@@ -96,7 +108,21 @@ var autoPopulateApplicationForm =function(){
 	$("#ApplicationPhone").val(localStorage.phone);
 	$("#ApplicationCreditRating").val(localStorage.creditrating);
 	$("#application_renterid").val(localStorage.renterid);
+	}
+	else{
+		var url = "http://maps.googleapis.com/maps/api/streetview?location="+localStorage.street.replace(/ /g,'')+","+localStorage.city+"&size=500x500&key=AIzaSyBkYy3QdqyYgHr8_jUiX8WEePPE5DGIQy8"
+	$("#applicationpropertyheader").html("<div class='polaroid'><div class='container'><p>Property: </p>"+ localStorage.street+"</div>"+"<img style ='width: 100%' src ="+"'"+url+"'"+ "'></div></div>")
+	$("#landlordname").val(localStorage.landlordfirstname+" "+ localStorage.landlordlastname);
+	$("#landlordemail").val(localStorage.landlordusername);
+	$("#ApplicationName").val(localStorage.firstname +" "+localStorage.lastname);
+	$("#ApplicationIncome").val(localStorage.income);
+	$("#ApplicationEmail").val(localStorage.username);
+	$("#ApplicationPhone").val(localStorage.phone);
+	$("#ApplicationCreditRating").val(localStorage.creditrating);
+	$("#application_renterid").val(localStorage.renterid);
 
+
+	}
 };
 
 // Populate list of properties in CITY
