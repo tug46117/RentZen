@@ -258,6 +258,7 @@ var GetProperty = function(){
 			//GetProperty(result); //login succeeded.  Set usertoken.
 			$(".content-wrapper").hide();
 			$("#div-propertylist").show();
+			$("#googlemap").html("");
 			autoPopulateProperties(result);
 		} ,
 		error:function(result){
@@ -268,26 +269,25 @@ var GetProperty = function(){
 		}, 
 	});
 	};
-// Get list of properties in CITY
+// Get Google Map
 var GetMap = function(){
-	//go get the data off the login form
-	//https://developers.google.com/maps/documentation/maps-static/dev-guide
-	//https://maps.googleapis.com/maps/api/staticmap?center=63.259591,-144.667969&zoom=6&size=400x400
-//&markers=color:blue%7Clabel:S%7C62.107733,-145.541936&markers=size:tiny%7Ccolor:green%7CDelta+Junction,AK
-//&markers=size:mid%7Ccolor:0xFFFF00%7Clabel:C%7CTok,AK"&key=YOUR_API_KEY
-	$.ajax({
+$("#googlemap").html("<div class='polaroid'><img style ='width: 100%' src ="+"'"+"http://maps.googleapis.com/maps/api/staticmap?center="+localStorage.street+",philadelphia&zoom=16&size=400x400&markers="+localStorage.street+",philadelphia&key=AIzaSyBkYy3QdqyYgHr8_jUiX8WEePPE5DGIQy8"+"'"+ "/></div>")
+/*$.ajax({
 		url: "https://maps.googleapis.com/maps/api/staticmap?",
 		type: "GET",
 		data: {
-		  center: "",
-		  destination: $("#destinations").val(),
-		  roadmap: "roadmap ",
-		  key: "AIzaSyBkYy3QdqyYgHr8_jUiX8WEePPE5DGIQy8"
+		  center: localStorage.street,
+		  size: "400x400",
+		  zoom: "15",
+		  roadmap: "roadmap",
+		  markers: localStorage.street,
+		  key:"AIzaSyBkYy3QdqyYgHr8_jUiX8WEePPE5DGIQy8"
 		},
 		success: function(data) {
-		  console.log(data);
+			console.log
+		  $("#googlemap").html("<img style ='width: 100%' src ="+"'"+data+"'"+ "/>")
 		}
-	  });
+	  });*/
 	};
 	//document ready section
 $(document).ready(function (){
@@ -402,6 +402,10 @@ $(document).ready(function (){
 		// show the next div
 		$("#div-applicationform").show();	
 		autoPopulateApplicationForm();
+	});
+	$('#btnMap').click(function(){
+		// show the next div
+		GetMap();
 	});
 	
 	}); /* end the document ready event*/
