@@ -59,6 +59,7 @@ var autoPopulateForm =function(){
 
 
 var UpdateLocalProperty = function(result){
+	localStorage.propertyid = result.propertyid;
 	localStorage.street = result.street;
 	localStorage.description = result.description;
 	localStorage.city = result.city;
@@ -66,7 +67,7 @@ var UpdateLocalProperty = function(result){
 	localStorage.baths = result.baths;
 	localStorage.sqft = result.sqft;
 	localStorage.rental_fee = result.rental_fee;
-	localStorage.zip = result.zip;
+	localStorage.picture_url = result.picture_url;
 	localStorage.landlordfirstname = result.landlordfirstname;
 	localStorage.landlordlastname = result.landlordlastname;
 	localStorage.landlordusername = result.landlordusername;
@@ -76,7 +77,7 @@ var UpdateLocalProperty = function(result){
 
 var autoPopulateLocalProperty =function(){
 	
-	$("#propertyheader").html("<div class='polaroid'><div class='container'><p>Property: </p>"+ localStorage.street+"</div>"+"<img style ='width: 100%' src='images/no_image.png'></div></div>")
+	$("#propertyheader").html("<div class='polaroid'><div class='container'><p>Property: </p>"+ localStorage.street+"</div>"+"<img style ='width: 100%' src='images/no_image.png'></div></div>");
 	$("#property_description").html("<b> Description: </b> <br> " + localStorage.description);
 	$("#property_city").html("<b> City: </b> <br> " + localStorage.city);
 	$("#property_bed").html("<b> Beds: </b> <br> " + localStorage.beds);
@@ -86,7 +87,7 @@ var autoPopulateLocalProperty =function(){
 	
 };
 var autoPopulateApplicationForm =function(){
-	$("#applicationpropertyheader").html("<div class='polaroid'><div class='container'><p>Property: </p>"+ localStorage.street+"</div>"+"<img style ='width: 100%' src='images/no_image.png'></div></div>")
+	$("#applicationpropertyheader").html("<div class='polaroid'><div class='container'><p>Property: </p>"+ localStorage.street+"</div>"+"<img style ='width: 100%' src='images/no_image.png'></div></div>");
 	$("#landlordname").val(localStorage.landlordfirstname+" "+ localStorage.landlordlastname);
 	$("#landlordemail").val(localStorage.landlordusername);
 	$("#ApplicationName").val(localStorage.firstname +" "+localStorage.lastname);
@@ -104,12 +105,20 @@ var autoPopulateProperties =function(result){
 
 	console.log(result);
 	for(var i=0;i<result.length;i++){
+		console.log(result[i]['picture_url']);
 		console.log(result[i]['street']);
-		
-		$("#divrow").append("<div class= 'col-md-6'> <div class='polaroidList'> <a href='#' onclick = showProperty("+ 
+		if(result[i]['picture_url']===""){
+			$("#divrow").append("<div class= 'col-md-6'> <div class='polaroidList'> <a href='#' onclick = showProperty("+ 
 		result[i]["propertyid"] +")>" + "<img style ='width: 100%' src ='images/no_image.png'><div class='container'><html>"+result[i]["street"]+"</html></div>" 
 		+ " </a> </div> </div>"
 			);
+		}
+		else {
+			$("#divrow").append("<div class= 'col-md-6'> <div class='polaroidList'> <a href='#' onclick = showProperty("+ 
+		result[i]["propertyid"] +")>" + "<img style ='width: 100%' <img style ='width: 100%' src ="+"'"+result[i]['picture_url']+"'"+ "'><div class='container'><html>"+result[i]["street"]+"</html></div>" 
+		+ " </a> </div> </div>");
+	}
+		
 
 	};
 }; 
@@ -273,11 +282,35 @@ var GetProperty = function(){
 	};
 // Get Google Map
 var GetMap = function(){
-$("#googlemap").html("<div class='polaroid'><img style ='width: 100%' src ="+"'"+"http://maps.googleapis.com/maps/api/staticmap?center="+localStorage.street+","+localStorage.city+","+localStorage.zip+"&zoom=16&size=500x500&markers="+localStorage.street+","+localStorage.city+","+localStorage.zip+"&key=AIzaSyBkYy3QdqyYgHr8_jUiX8WEePPE5DGIQy8"+"'"+ "/></div>")
+
+$("#googlemap").html("<div class='polaroid'><img style ='width: 100%' src ="+"'"+"http://maps.googleapis.com/maps/api/staticmap?center="+localStorage.street+","+localStorage.city+"&zoom=16&size=500x500&markers="+localStorage.street+","+localStorage.city+"&key=AIzaSyBkYy3QdqyYgHr8_jUiX8WEePPE5DGIQy8"+"'"+ "/></div>")
 
 	};
+
+
 var GetStreetView = function(){
-$("#googlestreet").html("<div class='polaroid'><img style ='width: 100%' src ="+"'"+"http://maps.googleapis.com/maps/api/streetview?location="+localStorage.street+","+localStorage.city+","+localStorage.zip+"&size=500x500&key=AIzaSyBkYy3QdqyYgHr8_jUiX8WEePPE5DGIQy8"+"'"+ "/></div>")
+
+var urltext = endpoint01 + '/picture_url?';
+
+var url = "http://maps.googleapis.com/maps/api/streetview?location="+localStorage.street.replace(/ /g,'')+","+localStorage.city+"&size=500x500&key=AIzaSyBkYy3QdqyYgHr8_jUiX8WEePPE5DGIQy8"
+$("#propertyid").val(localStorage.propertyid);
+$("#picture_url").val(url);
+var the_serialized_data = $('#form-url').serialize();
+$("#propertyheader").html("<div class='polaroid'><div class='container'><p>Property: </p>"+ localStorage.street+"</div>"+"<img style ='width: 100%' src ="+"'"+url+"'"+ "'></div></div>")
+$.ajax({
+	url: urltext,
+	type: 'PUT',
+	data: the_serialized_data,
+	success: function(result){
+
+		console.log(result);
+	},
+	error: function(result){
+		console.log(the_serialized_data);
+		console.log(result);
+	
+	}
+});
 		
 	};
 	//document ready section

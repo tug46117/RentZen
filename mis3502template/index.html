@@ -138,7 +138,7 @@
             <form id='form-city'>
                 <label for="city">City:</label>
                 <input type="text" name="city" id="cityForProperties" class="form-control" placeholder="Enter city">
-                
+                <input type="text" name="enter" style="display: none;">
                 <br>
                 <div class="text-center">
                 <input type="button" value="Search" name="btnCity" id="btnCity" class="btn btn-primary" style="font-size:2em;width:100%;" >
@@ -212,7 +212,6 @@
         <div class="col-md-8 content-wrapper " id="div-property" style="display: none;">
             <div class="text-center">    
                 <h2 id="propertyheader"></h2>
-                <div id="googlestreet"></div>
                 <div id="googlemap"></div>
                 <br> <br>
             </div> 
@@ -231,10 +230,13 @@
                     </p>
                 <br>
                 <div class="text-center">
-                    <input type="button" value="Apply" name="btnApply" id="btnApply" class="btn btn-primary text-center" style="font-size:2em;width:100%;" ><br>
-                    <input type="button" value="Google Street View" name="btnStreetView" id="btnStreetView" class="btn btn-info text-center" style="font-size:2em;width:100%;" > <br>
-                    <input type="button" value="Google Map" name="btnMap" id="btnMap" class="btn btn-secondary text-center" style="font-size:2em;width:100%;" > 
-
+                    <input type="button" value="Apply" name="btnApply" id="btnApply" class="btn btn-primary text-center" style="font-size:2em;width:100%;" ><br><br>
+                    <input type="button" value="Google Street View" name="btnStreetView" id="btnStreetView" class="btn btn-info text-center" style="font-size:2em;width:100%;" > <br><br>
+                    <input type="button" value="Google Map" name="btnMap" id="btnMap" class="btn btn-secondary text-center" style="font-size:2em;width:100%;" >     
+                    <form id='form-url' style="display: none;">
+                        <input type="text" name="propertyid" id="propertyid" class="form-control">
+                        <input type="text" name="picture_url" id="picture_url" class="form-control">
+                    </form>        
 
                 </div>
     </div>
