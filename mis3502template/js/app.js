@@ -66,6 +66,7 @@ var UpdateLocalProperty = function(result){
 	localStorage.baths = result.baths;
 	localStorage.sqft = result.sqft;
 	localStorage.rental_fee = result.rental_fee;
+	localStorage.zip = result.zip;
 	localStorage.landlordfirstname = result.landlordfirstname;
 	localStorage.landlordlastname = result.landlordlastname;
 	localStorage.landlordusername = result.landlordusername;
@@ -258,6 +259,7 @@ var GetProperty = function(){
 			//GetProperty(result); //login succeeded.  Set usertoken.
 			$(".content-wrapper").hide();
 			$("#div-propertylist").show();
+			$("#googlestreet").html("");
 			$("#googlemap").html("");
 			autoPopulateProperties(result);
 		} ,
@@ -271,23 +273,12 @@ var GetProperty = function(){
 	};
 // Get Google Map
 var GetMap = function(){
-$("#googlemap").html("<div class='polaroid'><img style ='width: 100%' src ="+"'"+"http://maps.googleapis.com/maps/api/staticmap?center="+localStorage.street+",philadelphia&zoom=16&size=400x400&markers="+localStorage.street+",philadelphia&key=AIzaSyBkYy3QdqyYgHr8_jUiX8WEePPE5DGIQy8"+"'"+ "/></div>")
-/*$.ajax({
-		url: "https://maps.googleapis.com/maps/api/staticmap?",
-		type: "GET",
-		data: {
-		  center: localStorage.street,
-		  size: "400x400",
-		  zoom: "15",
-		  roadmap: "roadmap",
-		  markers: localStorage.street,
-		  key:"AIzaSyBkYy3QdqyYgHr8_jUiX8WEePPE5DGIQy8"
-		},
-		success: function(data) {
-			console.log
-		  $("#googlemap").html("<img style ='width: 100%' src ="+"'"+data+"'"+ "/>")
-		}
-	  });*/
+$("#googlemap").html("<div class='polaroid'><img style ='width: 100%' src ="+"'"+"http://maps.googleapis.com/maps/api/staticmap?center="+localStorage.street+","+localStorage.city+","+localStorage.zip+"&zoom=16&size=500x500&markers="+localStorage.street+","+localStorage.city+","+localStorage.zip+"&key=AIzaSyBkYy3QdqyYgHr8_jUiX8WEePPE5DGIQy8"+"'"+ "/></div>")
+
+	};
+var GetStreetView = function(){
+$("#googlestreet").html("<div class='polaroid'><img style ='width: 100%' src ="+"'"+"http://maps.googleapis.com/maps/api/streetview?location="+localStorage.street+","+localStorage.city+","+localStorage.zip+"&size=500x500&key=AIzaSyBkYy3QdqyYgHr8_jUiX8WEePPE5DGIQy8"+"'"+ "/></div>")
+		
 	};
 	//document ready section
 $(document).ready(function (){
@@ -406,6 +397,10 @@ $(document).ready(function (){
 	$('#btnMap').click(function(){
 		// show the next div
 		GetMap();
+	});
+	$('#btnStreetView').click(function(){
+		// show the next div
+		GetStreetView();
 	});
 	
 	}); /* end the document ready event*/
