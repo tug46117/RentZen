@@ -204,6 +204,7 @@ var loginController = function(){
 };
 
 var logoutController = function(){
+	location.reload(true);
 	$('.secured').addClass('locked');
 	$('.secured').removeClass('unlocked');
 	$(".content-wrapper").hide();
