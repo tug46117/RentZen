@@ -171,6 +171,43 @@ var showProperty = function (result) {
 	});
 };
 
+// Populate list of rental applications 
+var autoPopulateRentalApplications =function(result){
+
+	    console.log(result);
+	    for(var i=0;i<result.length;i++){
+	        console.log(result[i]['street']);
+	        console.log(result[i]['landlordfirstname']);
+	    
+	        $("tbody").append("<tr> <td>" + result[i]['street'] + "</td>" + "<td>" + result[i]['landlordfirstname'] + " " + result[i]['landlordlastname'] + "</td>" + "</td>" + "<td>" + result[i]['rental_fee'] + "</td>" + "<td>" + result[i]['applicationstatus'] +"</td>" +"</tr>");
+	    };
+	
+	}; 
+	// END populate list of rental applications 
+	
+var getRentalApplications = function () {
+	    
+	    var the_serialized_data = localStorage.renterid; 
+	    console.log(the_serialized_data); 
+	    
+	    var urltext = endpoint01 + '/applications?renterid=';
+	
+	    $.ajax({
+	        url: urltext + the_serialized_data,
+	        type:'GET',
+	        success: function(result){
+	            $(".content-wrapper").hide();
+	            $("#div-rentalapplications").show();
+	            autoPopulateRentalApplications(result);
+	        } ,
+	        error:function(result){
+	            console.log(result);
+	            
+	        }, 
+	    });
+	};	
+
+
 var loginController = function(){
 	//go get the data off the login form
 	var the_serialized_data = $('#form-login').serialize();
@@ -503,4 +540,12 @@ $(document).ready(function (){
 		GetStreetView();
 	});
 	
+	/* what happens if the dashboard My Rental Applications is clicked  */
+	    $('#dashboard-getRentalApplications').click(function(){
+		        //Hide all the content wrapper
+		        $("tbody").html("");
+		        getRentalApplications(); 
+		    });
+		
+
 	}); /* end the document ready event*/
