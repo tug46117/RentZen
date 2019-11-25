@@ -4,10 +4,6 @@
 var endpoint01 = "http://52.14.130.229:8222";
  // should be possible to condtionally drop the user into the homepage without having to login in everytime.
 localStorage.renterid = 0;
-
-
-
-
 localStorage.lastnavlink = '';
 
 /* SUPPORTING FUNCTIONS */
@@ -98,6 +94,7 @@ var autoPopulateLocalProperty =function(){
 	
 };
 var autoPopulateApplicationForm =function(){
+
 	if(localStorage.picture_url ===""){
 	$("#applicationpropertyheader").html("<div class='polaroid'><div class='container'><p>Property: </p>"+ localStorage.street+"</div>"+"<img style ='width: 100%' src='images/no_image.png'></div></div>");
 	$("#landlordname").val(localStorage.landlordfirstname+" "+ localStorage.landlordlastname);
@@ -108,6 +105,7 @@ var autoPopulateApplicationForm =function(){
 	$("#ApplicationPhone").val(localStorage.phone);
 	$("#ApplicationCreditRating").val(localStorage.creditrating);
 	$("#application_renterid").val(localStorage.renterid);
+	$("#application_propertyid").val(localStorage.propertyid);
 	}
 	else{
 		var url = "http://maps.googleapis.com/maps/api/streetview?location="+localStorage.street.replace(/ /g,'')+","+localStorage.city+"&size=500x500&key=AIzaSyBkYy3QdqyYgHr8_jUiX8WEePPE5DGIQy8"
@@ -120,10 +118,10 @@ var autoPopulateApplicationForm =function(){
 	$("#ApplicationPhone").val(localStorage.phone);
 	$("#ApplicationCreditRating").val(localStorage.creditrating);
 	$("#application_renterid").val(localStorage.renterid);
-
-
+	$("#application_propertyid").val(localStorage.propertyid);
 	}
 };
+
 
 // Populate list of properties in CITY
 
@@ -206,13 +204,12 @@ var loginController = function(){
 };
 
 var logoutController = function(){
-	//go get the data off the login form
 	$('.secured').addClass('locked');
 	$('.secured').removeClass('unlocked');
-	$(".content-wrapper").hide()
+	$(".content-wrapper").hide();
 	// show the next div
-	$("#div-home").show()	
-
+	$("#div-home").show();	
+	
 	};
 
 var SignUp = function(){
@@ -306,7 +303,36 @@ var GetProperty = function(){
 		}, 
 	});
 	};
-// Get Google Map
+
+	//Submit Application
+	var submitApplication = function(){
+	
+		var the_serialized_data = $('#form-application').serialize();
+		console.log(the_serialized_data);
+		var urltext = endpoint01 + '/application';
+			$.ajax({
+				url: urltext,
+				type: 'POST',
+				data: the_serialized_data,
+				success: function(result){
+					console.log(the_serialized_data);
+					console.log(result);
+					$("#application_message").html("Your application has been successfully submitted.");
+					$("#application_message").show();
+					$("#application_message").removeClass();
+					$("#application_message").addClass("alert alert-success text-center");
+				},
+				error: function(result){
+					console.log(result);
+					$("#application_message").html("Cannot submit application.");
+					$("#application_message").show();
+					$("#application_message").removeClass();
+					$("#application_message").addClass("alert alert-danger text-center");
+				}
+			});
+		} //end submit Application 
+
+	// Get Google Map
 var GetMap = function(){
 
 $("#googlemap").html("<div class='polaroid'><img style ='width: 100%' src ="+"'"+"http://maps.googleapis.com/maps/api/staticmap?center="+localStorage.street+","+localStorage.city+"&zoom=16&size=500x500&markers="+localStorage.street+","+localStorage.city+"&key=AIzaSyBkYy3QdqyYgHr8_jUiX8WEePPE5DGIQy8"+"'"+ "/></div>")
@@ -339,6 +365,8 @@ $.ajax({
 });
 		
 	};
+
+
 	//document ready section
 $(document).ready(function (){
 
@@ -392,11 +420,13 @@ $(document).ready(function (){
 	});
 
 	/* what happens if the dashboard logout and navigation logout button is clicked ? */
-	$('#dashboardLogOut').click(function(){
+	$('#dashboardLogOut').click(function(){	
 		logoutController();
+		
 	});
 	$('#navLogout').click(function(){
 		logoutController();
+		
 	});
 	
 	
@@ -434,6 +464,8 @@ $(document).ready(function (){
 		$("#profile_message").hide();
 		GetUserProfile();
 	});
+
+
 	$('#UpdateProfileApplication').click(function(){
 		// show the next div
 		$("#div-applicationform").hide();
@@ -446,17 +478,25 @@ $(document).ready(function (){
 		updateProfile();
 
 	});
+
 	$('#btnApply').click(function(){
 		//Hide all the content wrapper
 		$(".content-wrapper").hide();
+		
 		// show the next div
 		$("#div-applicationform").show();	
 		autoPopulateApplicationForm();
 	});
+
+	$('#btnSubmitApplication').click(function(){
+		submitApplication();
+	});
+
 	$('#btnMap').click(function(){
 		// show the next div
 		GetMap();
 	});
+
 	$('#btnStreetView').click(function(){
 		// show the next div
 		GetStreetView();
