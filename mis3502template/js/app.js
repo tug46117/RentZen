@@ -423,6 +423,8 @@ $(document).ready(function (){
 	/* what to do when a navigation link is clicked */
 	$(".nav-link").click(function(){
 		navigationControl(this);
+		GetUserProfile();
+
 	});
 	/* what happens if the Homepage Sign Up button is clicked? */
 	$('#btnSignUpHome').click(function(){
@@ -518,9 +520,10 @@ $(document).ready(function (){
 	});
 
 	$('#btnApply').click(function(){
+		GetUserProfile();
+
 		//Hide all the content wrapper
 		$(".content-wrapper").hide();
-		
 		// show the next div
 		$("#div-applicationform").show();	
 		autoPopulateApplicationForm();
