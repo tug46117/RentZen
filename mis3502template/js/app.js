@@ -359,6 +359,8 @@ var GetProperty = function(){
 					$("#application_message").show();
 					$("#application_message").removeClass();
 					$("#application_message").addClass("alert alert-success text-center");
+					$("#btnSubmitApplication").prop('disabled',true);
+					
 				},
 				error: function(result){
 					console.log(result);
@@ -521,6 +523,10 @@ $(document).ready(function (){
 
 	$('#btnApply').click(function(){
 		GetUserProfile();
+		$("#btnSubmitApplication").prop('disabled',false);
+		$("#moveindate").val(null);
+		$("#renter_message").val(" ");
+		$("#application_message").css('display','none');
 
 		//Hide all the content wrapper
 		$(".content-wrapper").hide();
